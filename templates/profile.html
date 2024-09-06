@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+</head>
+<body>
+    <h1>User Profile</h1>
+    <h2>Order History:</h2>
+    <ul>
+        {% for order in orders %}
+        <li>
+            <h3>Order ID: {{ order.id }}</h3>
+            <p>Date: {{ order.date }}</p>
+            <p>Total: ${{ order.total }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+    <h2>Saved Addresses:</h2>
+    <ul>
+        {% for address in addresses %}
+        <li>
+            <p>{{ address.street }}</p>
+            <p>{{ address.city }}, {{ address.state }}, {{ address.zip }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

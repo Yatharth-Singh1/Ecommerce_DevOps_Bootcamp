@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/checkout.css') }}">
+</head>
+<body>
+    <h1>Checkout</h1>
+    <h2>Order Summary:</h2>
+    <ul>
+        {% for product in cart %}
+        <li>
+            <h3>{{ product.name }}</h3>
+            <p>Price: ${{ product.price }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+    <h2>Shipping Address:</h2>
+    <form action="{{ url_for('order_confirmation') }}" method="GET">
+        <input type="text" name="full_name" placeholder="Full Name" required>
+        <input type="text" name="address_line1" placeholder="Address Line 1" required>
+        <input type="text" name="address_line2" placeholder="Address Line 2">
+        <input type="text" name="city" placeholder="City" required>
+        <input type="text" name="state" placeholder="State" required>
+        <input type="text" name="postal_code" placeholder="Postal Code" required>
+        <input type="text" name="country" placeholder="Country" required>
+        <button type="submit">Place Order</button>
+    </form>
+</body>
+</html>

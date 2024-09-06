@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ecommerce
+spec:
+  selector:
+    matchLabels:
+      app: ecommerce
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ecommerce
+    spec:
+      containers:
+      - name: ecommercepi
+        image: 854171615125.dkr.ecr.eu-north-1.amazonaws.com/vanshika_ecommerce:latest
+        ports:
+        - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ecommerce
+spec:
+  selector:
+    app: ecommerce
+  ports:
+    - port: 80
+      targetPort: 8080

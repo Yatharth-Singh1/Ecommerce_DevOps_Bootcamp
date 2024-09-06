@@ -1,0 +1,24 @@
+pipeline {
+    agent any
+
+    environment {
+        AWS_ACCOUNT_ID = credentials('AWS_ACCOUNT_ID_CREDENTIALS')  // Use stored AWS Account ID
+        AWS_DEFAULT_REGION = 'eu-north-1'
+        IMAGE_REPO_NAME = "vanshika_ecommerce"
+        REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', 
+                    credentialsId: 'AWS_CREDENTIALS']]) {  // Use stored AWS Access and Secret keys
+                    sh 'aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin $REPOSITORY_URI'
+                    sh 'docker build -t ecommercepi .'
+                    sh "docker tag ecommercepi:latest $REPOSITORY_URI:latest"
+                    sh "docker push $REPOSITORY_URI:latest"
+                }
+            }
+        }
+    }
+}

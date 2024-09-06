@@ -1,0 +1,44 @@
+/* styles.css */
+
+/* Body styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+}
+
+/* Header styles */
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+}
+
+/* Product styles */
+.product {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.product h3 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.product p {
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+/* Cart styles */
+.cart-item {
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+}
+
+.cart-item:last-child {
+  border-bottom: none;
+}
+
+/* Other styles... */
